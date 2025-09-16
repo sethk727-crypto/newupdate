@@ -51,3 +51,47 @@
   <script src="script.js"></script>
 </body>
 </html>
+<!-- Trigger area (when user clicks the card) -->
+<div class="card" id="openModal">
+  <div class="card-header">
+    <span>Champs Downtown</span>
+    <span>Qty: 1</span>
+  </div>
+  <h2>LineSkip</h2>
+  <div class="qr">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=LineSkipPass" alt="QR Code">
+  </div>
+  <div class="card-footer">
+    <span>Passholder: Seth king</span>
+    <span>Expires at<br>Sep 16, 4:00 AM</span>
+  </div>
+</div>
+
+<!-- Modal Bottom Sheet -->
+<div class="modal" id="passModal">
+  <div class="modal-content">
+    <div class="modal-logo">
+      <img src="https://via.placeholder.com/60" alt="Champs Logo">
+    </div>
+    <div class="qr-large">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=LineSkipPass" alt="QR Code">
+      <p id="currentTime">Current time: </p>
+    </div>
+
+    <!-- Scanner effect -->
+    <div class="scanner">
+      <div class="line"></div>
+      <div class="icons">
+        <span>🍄</span>
+        <span>🦐</span>
+      </div>
+    </div>
+
+    <!-- Warning -->
+    <p class="warning">⚠️ This action cannot be undone</p>
+
+    <!-- Buttons -->
+    <button class="button redeem">Redeem</button>
+    <button class="button cancel" id="closeModal">Cancel</button>
+  </div>
+</div>
