@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LineSkip Pass</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header>
+    <div>My Passes</div>
+    <div id="dateTime"></div>
+  </header>
+
+  <!-- Pass Card -->
+  <div class="card">
+    <div class="card-header">
+      <span>Champs Downtown</span>
+      <span>Qty: 1</span>
+    </div>
+    <h2>LineSkip</h2>
+    <div class="qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=LineSkipPass" alt="QR Code">
+    </div>
+    <div class="card-footer">
+      <span>Passholder: Seth king</span>
+      <span>Expires at<br>Sep 16, 4:00 AM</span>
+    </div>
+  </div>
+
+  <!-- Instructions -->
+  <div class="instructions">
+    Show doorman pass to redeem.<br>
+    Only doorman should redeem.
+  </div>
+
+  <!-- Buttons -->
+  <button class="button staff">I am the bartender or venue staff</button>
+  <button class="button redeem">How to redeem this pass</button>
+
+  <!-- Bottom Navigation -->
+  <nav>
+    <div>Venues</div>
+    <div class="active">My Passes</div>
+    <div>Drops</div>
+    <div>Account</div>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
