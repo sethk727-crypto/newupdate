@@ -1,219 +1,284 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  background: #111;
-  color: #fff;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0d0d0d;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
 
-/* Top Bar */
-header {
-  padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  border-bottom: 1px solid #222;
-}
+    /* Blue Pass Card */
+    .card {
+      background: #007aff;
+      border-radius: 16px;
+      padding: 20px;
+      width: 90%;
+      max-width: 380px;
+      margin: 20px auto;
+      text-align: left;
+      position: relative;
+      color: #fff;
+    }
 
-/* Pass Card */
-.card {
-  background: linear-gradient(135deg, #007aff, #005bbb);
-  border-radius: 16px;
-  padding: 20px;
-  margin: 20px;
-  flex-shrink: 0;
-}
+    .card h2 { margin:0; font-size:22px; font-weight:600; }
+    .qty { position:absolute; top:20px; right:20px; }
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  margin-bottom: 10px;
-  opacity: 0.9;
-}
+    .qr { text-align:center; margin:20px 0; }
+    .qr img { width:160px; height:160px; background:#fff; padding:10px; border-radius:12px; }
 
-.card h2 {
-  margin: 0;
-  font-size: 22px;
-}
+    .details { display:flex; justify-content:space-between; font-size:14px; }
 
-.qr {
-  text-align: center;
-  margin: 15px 0;
-}
+    /* Buttons */
+    .btn {
+      display:block; width:90%; margin:10px auto;
+      padding:15px; font-size:16px; font-weight:600;
+      border:none; border-radius:12px; cursor:pointer;
+    }
+    .btn.gray { background:#2c2c2e; color:#fff; }
+    .btn.blue { background:#007aff; color:#fff; }
 
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  margin-top: 10px;
-  opacity: 0.9;
-}
+    /* Modal for staff redeem */
+    .modal {
+      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+      background:#0d0d0d; justify-content:center; align-items:center; flex-direction:column;
+      z-index:10;
+    }
 
-/* Instructions */
-.instructions {
-  text-align: center;
-  font-size: 13px;
-  margin: 10px 20px;
-  padding: 10px 0;
-  border-top: 1px solid #222;
-  border-bottom: 1px solid #222;
-  opacity: 0.8;
-}
+    .emoji-box {
+      display:flex; align-items:center; justify-content:center;
+      font-size:32px;
+      background:#1c1c1e;
+      padding:10px 20px;
+      border-radius:12px;
+      margin:20px 0;
+    }
 
-/* Buttons */
-.button {
-  display: block;
-  width: calc(100% - 40px);
-  margin: 12px auto;
-  padding: 14px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-}
+    .divider {
+      width:2px;
+      height:40px;
+      background:#007aff;
+      margin:0 15px;
+      animation: slideSide 1.5s infinite ease-in-out;
+    }
+    @keyframes slideSide {
+      0% { transform: translateX(-8px); }
+      50% { transform: translateX(8px); }
+      100% { transform: translateX(-8px); }
+    }
 
-.button.staff {
-  background: #222;
-  color: #fff;
-  border: 1px solid #444;
-}
+    /* Animation screen */
+    .animation-screen {
+      display:none;
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:#1c1c1e; justify-content:center; align-items:center; flex-direction:column;
+      z-index:20;
+    }
+    #loaderArc { width:120px; height:120px; }
+    #checkIcon { width:100px; height:100px; }
 
-.button.redeem {
-  background: #007aff;
-  color: #fff;
-}
+    .tagline { margin-top:20px; opacity:0; color:#bfbfbf; font-size:18px; }
 
-/* Bottom Navigation */
-nav {
-  display: flex;
-  justify-content: space-around;
-  padding: 8px 0;
-  border-top: 1px solid #222;
-  background: #0d0d0d;
-}
+    /* Pieces */
+    .pieces { display:flex; gap:10px; font-size:40px; color:white; }
 
-nav div {
-  font-size: 12px;
-  text-align: center;
-  flex: 1;
-  padding: 6px 0;
-  opacity: 0.6;
-}
+    /* LL Logo */
+    .ll-logo {
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      gap:5px;
+      transform: skewX(-15deg);
+    }
+    .l-block {
+      width:28px;
+      height:50px;
+      background:white;
+      position:relative;
+    }
+    .l-block::after {
+      content:"";
+      position:absolute;
+      bottom:0; left:0;
+      width:28px; height:12px;
+      background:white;
+    }
 
-nav .active {
-  color: #007aff;
-  opacity: 1;
-  font-weight: 600;
-}
-/* Modal Base */
-.modal {
-  position: fixed;
-  bottom: -100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0d0d0d;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  transition: bottom 0.3s ease;
-  z-index: 999;
-}
+    /* No Passes */
+    #noPasses {
+      display:none;
+      text-align:center;
+      margin-top:150px;
+      color:#fff;
+    }
+    #buyBtn {
+      display:none;
+      width:90%;
+      margin:20px auto;
+      padding:15px;
+      font-size:16px;
+      font-weight:600;
+      border:none;
+      border-radius:12px;
+      background:#007aff;
+      color:#fff;
+    }:root{
+    --bg:#0d0d0d;
+    --panel:#1c1c1e;
+    --blue:#007aff;
+    --yellow:#ffcc00;
+    --text:#fff;
+    --muted:#bfbfbf;
+  }
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 
-.modal.show {
-  bottom: 0;
-}
+  /* Pass card */
+  .card{background:var(--blue);color:#fff;border-radius:16px;padding:20px;width:90%;max-width:380px;margin:20px auto;position:relative}
+  .card h2{margin:0 0 10px;font-size:22px;font-weight:600}
+  .qty{position:absolute;top:20px;right:20px;font-weight:600}
+  .qr{text-align:center;margin:20px 0}
+  .qr img{width:160px;height:160px;background:#fff;border-radius:12px;padding:10px}
+  .details{display:flex;justify-content:space-between;font-size:14px}
+  .instruction{text-align:center;color:var(--muted);margin:20px auto 10px;width:90%}
 
-.modal-content {
-  width: 100%;
-  max-width: 420px;
-  background: #0d0d0d;
-  padding: 20px;
-  border-radius: 16px 16px 0 0;
-  text-align: center;
-}
+  .btn{display:block;width:90%;margin:10px auto;padding:15px;font-size:16px;font-weight:600;border:none;border-radius:12px;cursor:pointer}
+  .btn.gray{background:#2c2c2e;color:#fff;border:1px solid #3a3a3c}
+  .btn.blue{background:var(--blue);color:#fff}
 
-/* Logo circle */
-.modal-logo img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin: 0 auto 10px;
-}
+  /* Staff modal */
+  .modal{position:fixed;inset:0;display:none;z-index:20;background:#0f0f10;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+  .qr-box{background:#183d67;border-radius:16px;padding:20px;text-align:center}
+  .qr-box img{width:180px;height:180px;background:#fff;border-radius:12px;padding:10px}
+  .time{margin-top:8px;color:#e7e7e7;font-size:14px}
 
-/* QR Code */
-.qr-large img {
-  width: 200px;
-  height: 200px;
-  margin: 10px 0;
-}
+  .emoji-wrap{background:var(--panel);padding:12px 44px;border-radius:12px;position:relative;display:flex;align-items:center;gap:54px}
+  .emoji{font-size:32px;line-height:1}
+  /* vertical line that slides side-to-side WITHOUT touching emojis */
+  .divider{
+    position:absolute;top:10px;bottom:10px;width:3px;background:var(--blue);
+    animation:scan 1.8s ease-in-out infinite;
+  }
+  /* keep a safe padding from both emojis (approx 52px from each side) */
+  @keyframes scan{
+    0%   { left:52px; }
+    50%  { left:calc(100% - 52px); }
+    100% { left:52px; }
+  }
 
-#currentTime {
-  font-size: 14px;
-  opacity: 0.8;
-}
+  .warning{color:var(--yellow);font-size:14px;margin:6px 0 4px}
 
-/* Scanner effect */
-.scanner {
-  position: relative;
-  margin: 20px 0;
-  height: 60px;
-  background: #111;
-  border-radius: 10px;
-  overflow: hidden;
-}
+  /* Fullscreen animation */
+  .animation{position:fixed;inset:0;display:none;z-index:30;background:#1f262c;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+  #loaderArc{width:120px;height:120px}
+  #checkIcon{width:110px;height:110px}
+  .tagline{color:#aeb4b9;opacity:0;margin-top:8px;font-size:18px}
 
-.scanner .line {
-  position: absolute;
-  width: 2px;
-  height: 100%;
-  background: #007aff;
-  animation: moveLine 2s infinite alternate ease-in-out;
-}
+  .pieces{display:none;gap:12px}
+  .pieces div{width:22px;height:22px;background:#fff;border-radius:2px}
 
-@keyframes moveLine {
-  from { left: 5%; }
-  to { left: 95%; }
-}
+  /* No passes */
+  .empty{display:none;text-align:center;margin-top:120px}
+  .buy{display:none;width:90%;margin:18px auto 0;padding:15px;background:var(--blue);color:#fff;border:none;border-radius:12px;font-weight:700}body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0d0d0d;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
 
-.scanner .icons {
-  display: flex;
-  justify-content: space-around;
-  font-size: 28px;
-  position: relative;
-  top: 15px;
-}
+    /* ====== Pass Card ====== */
+    .card {
+      background: #007aff;
+      border-radius: 16px;
+      padding: 20px;
+      width: 90%;
+      max-width: 380px;
+      margin: 20px auto;
+      text-align: left;
+      position: relative;
+      color: #fff;
+    }
+    .card h2 { margin:0; font-size:22px; font-weight:600; }
+    .qty { position:absolute; top:20px; right:20px; }
+    .qr { text-align:center; margin:20px 0; }
+    .qr img { width:160px; height:160px; background:#fff; padding:10px; border-radius:12px; }
+    .details { display:flex; justify-content:space-between; font-size:14px; }
 
-/* Warning */
-.warning {
-  color: #ffcc00;
-  font-size: 13px;
-  margin: 12px 0;
-}
+    /* Buttons */
+    .btn {
+      display:block; width:90%; margin:10px auto;
+      padding:15px; font-size:16px; font-weight:600;
+      border:none; border-radius:12px; cursor:pointer;
+    }
+    .btn.gray { background:#2c2c2e; color:#fff; }
+    .btn.blue { background:#007aff; color:#fff; }
 
-/* Buttons */
-.button.redeem {
-  width: 90%;
-  margin: 8px auto;
-  background: #007aff;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 12px;
-  font-size: 16px;
-  cursor: pointer;
-}
+    /* Modal for staff redeem */
+    .modal {
+      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+      background:#0d0d0d; justify-content:center; align-items:center; flex-direction:column;
+      z-index:10;
+    }
 
-.button.cancel {
-  background: transparent;
-  color: #aaa;
-  border: none;
-  font-size: 16px;
-  margin-top: 10px;
-  cursor: pointer;
-}
+    .emoji-box {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-size:32px;
+      background:#1c1c1e;
+      padding:10px 40px;
+      border-radius:12px;
+      margin:20px 0;
+      width:220px;
+      position:relative;
+    }
+    .divider {
+      position:absolute;
+      top:10px; bottom:10px;
+      width:3px;
+      background:#007aff;
+      animation: scanLine 2s infinite ease-in-out;
+    }
+    @keyframes scanLine {
+      0%   { left:40px; }              /* near mushroom */
+      50%  { left:calc(100% - 40px); } /* near shrimp */
+      100% { left:40px; }
+    }
+
+    /* Animation screen */
+    .animation-screen {
+      display:none;
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:#1c1c1e; justify-content:center; align-items:center; flex-direction:column;
+      z-index:20;
+    }
+    #loaderArc { width:120px; height:120px; }
+    #checkIcon { width:100px; height:100px; }
+    .tagline { margin-top:20px; opacity:0; color:#bfbfbf; font-size:18px; }
+
+    .pieces { display:flex; gap:10px; font-size:40px; color:white; }
+
+    /* LL Logo image */
+    #llLogo {
+      display:none;
+      width:120px;
+      height:auto;
+    }
+
+    /* No Passes */
+    #noPasses {
+      display:none;
+      text-align:center;
+      margin-top:150px;
+      color:#fff;
+    }
+    #buyBtn {
+      display:none;
+      width:90%;
+      margin:20px auto;
+      padding:15px;
+      font-size:16px;
+      font-weight:600;
+      border:none;
+      border-radius:12px;
+      background:#007aff;
+      color:#fff;
+    }
